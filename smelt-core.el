@@ -32,6 +32,8 @@
 
 ;;;; Variables
 
+(defvar smelt-mode--setup-hook nil)
+
 ;;;; Keymaps
 
 (defvar smelt-mode-map
@@ -69,6 +71,7 @@
 
 \\{smelt-mode-map}"
   :group 'smelt
+  (run-hooks 'smelt-mode--setup-hook)
 )
 
 ;;;###autoload
@@ -79,7 +82,7 @@
 ;;;;; Comment
 
 (defun smelt-comment--setup ()
-  "Configure comments for smelt."
+  "Configure comments for `smelt-mode'."
   (setq-local parse-sexp-ignore-comments t)
   (setq-local comment-start "(* ")
   (setq-local comment-end " *)")
@@ -87,7 +90,7 @@
   (setq-local comment-end-skip "\\s-*\\*+)")
   (setq-local comment-quote-nested nil)
 )
-(add-hook 'smelt-mode-hook #'smelt-comment--setup -25)
+(add-hook 'smelt-mode--setup-hook #'smelt-comment--setup 1)
 
 ;;;; Footer
 

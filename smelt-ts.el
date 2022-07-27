@@ -24,10 +24,10 @@
 (smelt-ts--init-major-mode-alist)
 
 (defun smelt-ts--setup ()
-  "Configure and enable `tree-sitter-mode'."
+  "Configure and enable `tree-sitter-mode' for `smelt-mode'."
   (tree-sitter-mode +1)
 )
-(add-hook 'smelt-mode-hook #'smelt-ts--setup -15)
+(add-hook 'smelt-mode--setup-hook #'smelt-ts--setup 1)
 
 (provide 'smelt-ts)
 

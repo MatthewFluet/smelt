@@ -20,12 +20,13 @@
     (file-missing nil)))
 
 (defun smelt-tshl--setup ()
-  "Configure and enable `tree-sitter-hl-mode'."
-  (setq-local font-lock-defaults '(()))
+  "Configure and enable `tree-sitter-hl-mode' for `smelt-mode'."
+  (if (null font-lock-defaults)
+      (setq-local font-lock-defaults '(())))
   (setq-local tree-sitter-hl-default-patterns smelt-tshl--hl-default-patterns)
   (tree-sitter-hl-mode +1)
 )
-(add-hook 'smelt-mode-hook #'smelt-tshl--setup -10)
+(add-hook 'smelt-mode--setup-hook #'smelt-tshl--setup 1)
 
 (provide 'smelt-tshl)
 

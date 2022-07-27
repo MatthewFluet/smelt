@@ -15,10 +15,10 @@
   '(smelt-fl--keywords nil nil ((?\\ . "\\"))))
 
 (defun smelt-fl--setup ()
-  "Configure `font-lock-mode'."
+  "Configure `font-lock-mode' for `smelt-mode'."
   (setq-local font-lock-defaults smelt-fl--defaults)
 )
-(add-hook 'smelt-mode-hook #'smelt-fl--setup -20)
+(add-hook 'smelt-mode--setup-hook #'smelt-fl--setup 1)
 
 (provide 'smelt-fl)
 
