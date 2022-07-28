@@ -20,7 +20,7 @@
   (concat (file-name-as-directory smelt--dir) "bin/")
   "Directory of (platform-dependent) support binaries.")
 
-(defconst smelt--sml-keywords
+(defconst smelt--reserved-words-alpha
   '(;; Reserved Words Core
     "abstype" "and" "andalso" "as" "case" "datatype" "do" "else" "end"
     "exception" "fn" "fun" "handle" "if" "in" "infix" "infixr" "let"

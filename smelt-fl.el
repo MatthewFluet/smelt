@@ -9,7 +9,7 @@
 (require 'font-lock)
 
 (defconst smelt-fl--keywords
-  `((,(regexp-opt smelt--sml-keywords 'symbols) . font-lock-keyword-face)))
+  `((,(regexp-opt smelt--reserved-words-alpha 'symbols) . font-lock-keyword-face)))
 
 (defconst smelt-fl--defaults
   '(smelt-fl--keywords nil nil ((?\\ . "\\"))))
