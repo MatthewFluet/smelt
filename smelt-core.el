@@ -29,6 +29,11 @@
     ;; Reserved Words Modules
     "eqtype" "functor" "include" "sharing" "sig" "signature" "struct"
     "structure" "where"))
+(defconst smelt--reserved-words-sym
+  '(;; Reserved Words Core
+    "(" ")" "[" "]" "{" "}" "," ":" ";" "..." "_" "|" "=" "=>" "->" "#"
+    ;; Reserved Words Modules
+    ":>"))
 
 ;;;; Variables
 
