@@ -14,6 +14,21 @@
   "Face for warnings."
   :group 'tree-sitter-hl-faces)
 
+(defface tree-sitter-hl-face:type-def
+  '((default :inherit tree-sitter-hl-face:type :slant italic))
+  "Face for type definitions."
+  :group 'tree-sitter-hl-faces)
+
+(defface tree-sitter-hl-face:module-def
+  '((default :inherit tree-sitter-hl-face:variable :weight bold))
+  "Face for module definitions."
+  :group 'tree-sitter-hl-faces)
+
+(defface tree-sitter-hl-face:interface-def
+  '((default :inherit tree-sitter-hl-face:type-def :weight bold))
+  "Face for interface definitions."
+  :group 'tree-sitter-hl-faces)
+
 (defconst smelt-tshl-highlights-file
   (concat (file-name-as-directory smelt--dir) "smelt-tshl-highlights.scm"))
 

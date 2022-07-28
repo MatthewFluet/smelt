@@ -42,25 +42,6 @@
 [(string_scon) (char_scon)] @string
 
 ;; *******************************************************************
-;; Types
-;; *******************************************************************
-
-[(tyvar) (tycon) (longtycon)] @type
-(tyvarseq ["(" "," ")"] @type)
-
-(fn_ty "->" @type)
-(tuple_ty "*" @type)
-(paren_ty ["(" ")"] @type)
-(tyvar_ty (tyvar) @type)
-(record_ty
- ["{" "," "}"] @type
- (tyrow [(lab) ":"] @type)?
- (ellipsis_tyrow ["..." ":"] @type)?)
-(tycon_ty
- (tyseq ["(" "," ")"] @type)?
- (longtycon) @type)
-
-;; *******************************************************************
 ;; Constructors
 ;; *******************************************************************
 
@@ -93,24 +74,62 @@
           (#match? @vid "ref"))) @constant.builtin
 
 ;; *******************************************************************
-;; Value identifiers (binding occurrences)
+;; Identifiers (binding occurrences)
 ;; *******************************************************************
 
+;; Tyvar identifiers
+(tyvarseq (["(" "," ")"] @type-def)? (tyvar) @type-def)
+
+;; Value identifiers
 (vid_pat (longvid (vid) @variable))
+(fvalbind (fmrule name: (vid) @variable))
 
-(fun_dec (fvalbind (fmrule name: (vid) @function)))
+(valdesc (vid) @variable)
+
+;; Tycon identifiers
+(typbind name: (tycon) @type-def)
+(datbind name: (tycon) @type-def)
+(datarepl_dec name: (tycon) @type-def)
+
+(typedesc (tycon) @type-def)
+(datdesc (tycon) @type-def)
+(datarepl_spec name: (tycon) @type-def)
+
+;; Structure identifiers
+(strbind name: (strid) @module-def)
+
+(strdesc (strid) @module-def)
+
+(fctbind (strid) @module-def)
+
+;; Signature identifiers
+(sigbind name: (sigid) @interface-def)
+
+;; Functor identifiers
+(fctbind name: (fctid) @module-def)
 
 ;; *******************************************************************
+;; Types
+;; *******************************************************************
+
+(fn_ty "->" @type)
+(tuple_ty "*" @type)
+(paren_ty ["(" ")"] @type)
+(tyvar_ty (tyvar) @type)
+(record_ty
+ ["{" "," "}"] @type
+ (tyrow [(lab) ":"] @type)?
+ (ellipsis_tyrow ["..." ":"] @type)?)
+(tycon_ty
+ (tyseq ["(" "," ")"] @type)?
+ (longtycon) @type)
+
+;; *******************************************************************
+;; Misc
+;; *******************************************************************
+
 ;; Record Selector Expressions
-;; *******************************************************************
-
 (recordsel_exp "#" (lab)) @label
-
-;; *******************************************************************
-;; Modules
-;; *******************************************************************
-
-;; [(strid) (sigid) (funid)] @module
 
 ;; *******************************************************************
 ;; Punctuation
