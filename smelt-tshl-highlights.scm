@@ -49,13 +49,13 @@
 ;; Constructors
 ;; *******************************************************************
 
-;; Assume value identifiers starting with capital letter are constructors
+;; Assume value identifiers starting with capital letter are constructors.
 ((vid) @constructor
  (#match? @constructor "^[A-Z].*"))
 (longvid ((vid) @vid
           (#match? @vid "^[A-Z].*"))) @constructor
 
-;; "true", "false", "nil", "::", and "ref" are built-in constructors
+;; "true", "false", "nil", "::", and "ref" are built-in constructors.
 ((vid) @constant.builtin
  (#match? @constant.builtin "true"))
 ((vid) @constant.builtin
