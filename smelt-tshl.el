@@ -9,6 +9,11 @@
 
 (require 'tree-sitter-hl)
 
+(defface tree-sitter-hl-face:warning
+  '((default :inherit font-lock-warning-face))
+  "Face for warnings."
+  :group 'tree-sitter-hl-faces)
+
 (defconst smelt-tshl-highlights-file
   (concat (file-name-as-directory smelt--dir) "smelt-tshl-highlights.scm"))
 

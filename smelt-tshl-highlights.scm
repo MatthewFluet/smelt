@@ -20,6 +20,21 @@
 ] @keyword
 
 ;; *******************************************************************
+;; Reserved Words
+;; *******************************************************************
+
+;; Because tree-sitter uses context-sensitive scanning, a reserved word can be
+;; parsed as an identifier if that reserved word cannot occur in a particular
+;; context; for example, `val x = struct` is parsed as a valbind with `struct`
+;; parsed as a vid.  Highlight such misinterpreted identifiers.
+([(vid) (tycon) (strid) (sigid) (fctid)] @warning
+ (#match? @warning "^(?:a(?:bstype|nd(?:also)?|s)|case|d(?:atatype|o)|e(?:lse|nd|qtype|xception)|f(?:n|un(?:ctor)?)|handle|i(?:n(?:clude|fixr?)|[fn])|l(?:et|ocal)|nonfix|o(?:pen|relse|[fp])|r(?:aise|ec)|s(?:haring|ig(?:nature)?|truct(?:ure)?)|t(?:hen|ype)|val|w(?:h(?:(?:er|il)e)|ith(?:type)?)|:|_|\\||=>|->|#)$"))
+
+;; As an additional special case, The Defn of SML excludes `*` from tycon.
+([(tycon)] @warning
+ (#match? @warning "^\\*$"))
+
+;; *******************************************************************
 ;; Constants
 ;; *******************************************************************
 
