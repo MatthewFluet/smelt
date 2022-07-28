@@ -78,18 +78,12 @@
           (#match? @vid "ref"))) @constant.builtin
 
 ;; *******************************************************************
-;; Functions
+;; Value identifiers (binding occurrences)
 ;; *******************************************************************
 
-;; Binding occurrence
-(fun_dec (fvalbind (fmrule name: (vid) @function)))
-
-;; *******************************************************************
-;; Variables
-;; *******************************************************************
-
-;; Binding occurrence
 (vid_pat (longvid (vid) @variable))
+
+(fun_dec (fvalbind (fmrule name: (vid) @function)))
 
 ;; *******************************************************************
 ;; Modules
