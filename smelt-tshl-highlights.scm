@@ -107,6 +107,7 @@
 
 ;; Signature identifiers
 (sigbind name: (sigid) @interface-def)
+(sigid) @interface
 
 ;; Functor identifiers
 (fctbind name: (fctid) @module-def)

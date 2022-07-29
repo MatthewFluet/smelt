@@ -24,8 +24,13 @@
   "Face for module definitions."
   :group 'tree-sitter-hl-faces)
 
+(defface tree-sitter-hl-face:interface
+  '((default :inherit tree-sitter-hl-face:type :weight bold))
+  "Face for interface uses."
+  :group 'tree-sitter-hl-faces)
+
 (defface tree-sitter-hl-face:interface-def
-  '((default :inherit tree-sitter-hl-face:type-def :weight bold))
+  '((default :inherit tree-sitter-hl-face:interface :slant italic))
   "Face for interface definitions."
   :group 'tree-sitter-hl-faces)
 
