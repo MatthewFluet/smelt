@@ -82,7 +82,10 @@
 
 ;; Value identifiers
 (vid_pat (longvid (vid) @variable))
-(fvalbind (fmrule name: (vid) @variable))
+(labvar_patrow (vid) @variable)
+; (as_pat (vid) @variable)
+
+(fmrule name: (vid) @variable)
 
 (valdesc (vid) @variable)
 
