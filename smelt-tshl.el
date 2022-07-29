@@ -14,13 +14,33 @@
   "Face for warnings."
   :group 'tree-sitter-hl-faces)
 
-(defface tree-sitter-hl-face:type-def
+(defface tree-sitter-hl-face:variant
+  '((default :inherit tree-sitter-hl-face:constant.builtin :weight thin))
+  "Face for enum variant uses."
+  :group 'tree-sitter-hl-faces)
+
+(defface tree-sitter-hl-face:variant.builtin
+  '((default :inherit tree-sitter-hl-face:variant :weight bold))
+  "Face for builtin enum variants."
+  :group 'tree-sitter-hl-faces)
+
+(defface tree-sitter-hl-face:variant.def
+  '((default :inherit tree-sitter-hl-face:variant :slant italic))
+  "Face for enum variant definitions."
+  :group 'tree-sitter-hl-faces)
+
+(defface tree-sitter-hl-face:type.def
   '((default :inherit tree-sitter-hl-face:type :slant italic))
   "Face for type definitions."
   :group 'tree-sitter-hl-faces)
 
-(defface tree-sitter-hl-face:module-def
-  '((default :inherit tree-sitter-hl-face:variable :weight bold))
+(defface tree-sitter-hl-face:module
+  '((default :inherit tree-sitter-hl-face:variable))
+  "Face for module uses."
+  :group 'tree-sitter-hl-faces)
+
+(defface tree-sitter-hl-face:module.def
+  '((default :inherit tree-sitter-hl-face:module :weight bold))
   "Face for module definitions."
   :group 'tree-sitter-hl-faces)
 
@@ -29,7 +49,7 @@
   "Face for interface uses."
   :group 'tree-sitter-hl-faces)
 
-(defface tree-sitter-hl-face:interface-def
+(defface tree-sitter-hl-face:interface.def
   '((default :inherit tree-sitter-hl-face:interface :slant italic))
   "Face for interface definitions."
   :group 'tree-sitter-hl-faces)

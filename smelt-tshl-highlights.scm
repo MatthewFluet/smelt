@@ -42,45 +42,45 @@
 [(string_scon) (char_scon)] @string
 
 ;; *******************************************************************
-;; Constructors
+;; Tyvar Identifiers
+;; *******************************************************************
+
+;; binding occurrences
+(tyvarseq (["(" "," ")"] @type.def)? (tyvar) @type.def)
+
+;; *******************************************************************
+;; Value Identifiers (Constructors)
 ;; *******************************************************************
 
 ;; Assume value identifiers starting with capital letter are constructors.
-((vid) @constructor
- (#match? @constructor "^[A-Z].*"))
+
+;; binding occurrences
+(conbind ((vid) @variant.def
+          (#match? @variant.def "^[A-Z].*")))
+(exbind ((vid) @variant.def
+         (#match? @variant.def "^[A-Z].*")))
+(condesc ((vid) @variant.def
+          (#match? @variant.def "^[A-Z].*")))
+(exdesc ((vid) @variant.def
+         (#match? @variant.def "^[A-Z].*")))
+
+;; use occurrences
+((vid) @variant
+ (#match? @variant "^[A-Z].*"))
 (longvid ((vid) @vid
-          (#match? @vid "^[A-Z].*"))) @constructor
+          (#match? @vid "^[A-Z].*"))) @variant
 
 ;; "true", "false", "nil", "::", and "ref" are built-in constructors.
-((vid) @constant.builtin
- (#match? @constant.builtin "true"))
-((vid) @constant.builtin
- (#match? @constant.builtin "false"))
-((vid) @constant.builtin
- (#match? @constant.builtin "nil"))
-((vid) @constant.builtin
- (#match? @constant.builtin "::"))
-((vid) @constant.builtin
- (#match? @constant.builtin "ref"))
+((vid) @variant.builtin
+ (#match? @variant.builtin "^(true|false|nil|::|ref)$"))
 (longvid ((vid) @vid
-          (#match? @vid "true"))) @constant.builtin
-(longvid ((vid) @vid
-          (#match? @vid "false"))) @constant.builtin
-(longvid ((vid) @vid
-          (#match? @vid "nil"))) @constant.builtin
-(longvid ((vid) @vid
-           (#match? @vid "::"))) @constant.builtin
-(longvid ((vid) @vid
-          (#match? @vid "ref"))) @constant.builtin
+          (#match? @vid "^(true|false|nil|::|ref)$"))) @variant.builtin
 
 ;; *******************************************************************
-;; Identifiers (binding occurrences)
+;; Value Identifiers
 ;; *******************************************************************
 
-;; Tyvar identifiers
-(tyvarseq (["(" "," ")"] @type-def)? (tyvar) @type-def)
-
-;; Value identifiers
+;;; binding occurrences
 (vid_pat (longvid (vid) @variable))
 (labvar_patrow (vid) @variable)
 ; (as_pat (vid) @variable)
@@ -89,28 +89,46 @@
 
 (valdesc (vid) @variable)
 
-;; Tycon identifiers
-(typbind name: (tycon) @type-def)
-(datbind name: (tycon) @type-def)
-(datarepl_dec name: (tycon) @type-def)
+;; *******************************************************************
+;; Tycon Identifiers
+;; *******************************************************************
 
-(typedesc (tycon) @type-def)
-(datdesc (tycon) @type-def)
-(datarepl_spec name: (tycon) @type-def)
+;;; binding occurrences
+(typbind name: (tycon) @type.def)
+(datbind name: (tycon) @type.def)
+(datarepl_dec name: (tycon) @type.def)
 
-;; Structure identifiers
-(strbind name: (strid) @module-def)
+(typedesc (tycon) @type.def)
+(datdesc (tycon) @type.def)
+(datarepl_spec name: (tycon) @type.def)
 
-(strdesc (strid) @module-def)
+;; *******************************************************************
+;; Structure Identifiers
+;; *******************************************************************
 
-(fctbind (strid) @module-def)
+;;; binding occurrences
+(strbind name: (strid) @module.def)
 
-;; Signature identifiers
-(sigbind name: (sigid) @interface-def)
+(strdesc (strid) @module.def)
+
+(fctbind (strid) @module.def)
+
+;; *******************************************************************
+;; Signature Identifiers
+;; *******************************************************************
+
+;;; binding occurrences
+(sigbind name: (sigid) @interface.def)
+
+;;; use occurrencess
 (sigid) @interface
 
-;; Functor identifiers
-(fctbind name: (fctid) @module-def)
+;; *******************************************************************
+;; Functor Identifiers
+;; *******************************************************************
+
+;;; binding occurrences
+(fctbind name: (fctid) @module.def)
 
 ;; *******************************************************************
 ;; Types
