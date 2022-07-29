@@ -131,8 +131,9 @@
 ;; Misc
 ;; *******************************************************************
 
-;; Record Selector Expressions
-(recordsel_exp "#" (lab)) @label
+;; Record Labels
+(recordsel_exp "#" @property)
+(lab) @property
 
 ;; *******************************************************************
 ;; Punctuation
