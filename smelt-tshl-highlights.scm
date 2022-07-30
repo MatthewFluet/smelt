@@ -55,45 +55,55 @@
 ;; Assume value identifiers starting with capital letter are constructors.
 
 ;; binding occurrences
-(conbind ((vid) @variant.def
-          (#match? @variant.def "^[A-Z].*")))
-(exbind ((vid) @variant.def
-         (#match? @variant.def "^[A-Z].*")))
-(condesc ((vid) @variant.def
-          (#match? @variant.def "^[A-Z].*")))
-(exdesc ((vid) @variant.def
-         (#match? @variant.def "^[A-Z].*")))
+(conbind name: ((vid) @variant.def
+                (#match? @variant.def "^[A-Z].*")))
+(exbind name: ((vid) @variant.def
+               (#match? @variant.def "^[A-Z].*")))
+(condesc name: ((vid) @variant.def
+                (#match? @variant.def "^[A-Z].*")))
+(exdesc name: ((vid) @variant.def
+               (#match? @variant.def "^[A-Z].*")))
 
 ;; use occurrences
-((vid) @variant
- (#match? @variant "^[A-Z].*"))
-(longvid ((vid) @vid
-          (#match? @vid "^[A-Z].*"))) @variant
+(vid_exp (longvid ((vid) @vid
+                   (#match? @vid "^[A-Z].*"))) @variant.use)
+(exbind def: (longvid ((vid) @vid
+                       (#match? @vid "^[A-Z].*"))) @variant.use)
+(vid_pat (longvid ((vid) @vid
+                   (#match? @vid "^[A-Z].*"))) @variant.use)
 
 ;; "true", "false", "nil", "::", and "ref" are built-in constructors.
-((vid) @variant.builtin
- (#match? @variant.builtin "^(true|false|nil|::|ref)$"))
-(longvid ((vid) @vid
-          (#match? @vid "^(true|false|nil|::|ref)$"))) @variant.builtin
+(vid_exp (longvid ((vid) @vid
+                   (#match? @vid "^(true|false|nil|::|ref)$"))) @variant.builtin)
+(vid_pat (longvid ((vid) @vid
+                   (#match? @vid "^(true|false|nil|::|ref)$"))) @variant.builtin)
 
 ;; *******************************************************************
 ;; Value Identifiers
 ;; *******************************************************************
 
-;;; binding occurrences
-(vid_pat (longvid (vid) @variable))
-(labvar_patrow (vid) @variable)
-; (as_pat (vid) @variable)
-
+;; binding occurrences
 (fmrule name: (vid) @variable)
 
+(infix_dec (vid) @variable.def)
+(infixr_dec (vid) @variable.def)
+(nonfix_dec (vid) @variable.def)
+
+(vid_pat (longvid . (vid) @variable.def))
+(labvar_patrow (vid) @variable.def)
+; (as_pat (vid) @variable.def)
+
 (valdesc (vid) @variable)
+
+;; use occurrences
+(vid_exp (longvid) @variable.use)
+(labvar_exprow (vid) @variable.use)
 
 ;; *******************************************************************
 ;; Tycon Identifiers
 ;; *******************************************************************
 
-;;; binding occurrences
+;; binding occurrences
 (typbind name: (tycon) @type.def)
 (datbind name: (tycon) @type.def)
 (datarepl_dec name: (tycon) @type.def)
@@ -106,11 +116,13 @@
 
 (sharingtype_spec (longtycon) @type.def)
 
+;; use occurrences: see `Types`
+
 ;; *******************************************************************
 ;; Structure Identifiers
 ;; *******************************************************************
 
-;;; binding occurrences
+;; binding occurrences
 (strbind name: (strid) @module.def)
 
 (strdesc (strid) @module.def)
@@ -118,6 +130,10 @@
 (sharing_spec (longstrid) @type.def)
 
 (fctbind (strid) @module.def)
+
+;; use occurences
+(open_dec (longstrid) @module.use)
+(strid_strexp (longstrid) @module.use)
 
 ;; *******************************************************************
 ;; Signature Identifiers
@@ -127,42 +143,45 @@
 (sigbind name: (sigid) @interface.def)
 
 ;;; use occurrencess
-(sigid) @interface
+(sigid_sigexp (sigid) @interface)
+(include_spec (sigid) @interface)
 
 ;; *******************************************************************
 ;; Functor Identifiers
 ;; *******************************************************************
 
-;;; binding occurrences
+;; binding occurrences
 (fctbind name: (fctid) @module.def)
+
+;; use occurrences
+(fctapp_strexp (fctid) @module.def)
 
 ;; *******************************************************************
 ;; Types
 ;; *******************************************************************
 
-(fn_ty "->" @type)
-(tuple_ty "*" @type)
-(paren_ty ["(" ")"] @type)
-(tyvar_ty (tyvar) @type)
+(fn_ty "->" @type.use)
+(tuple_ty "*" @type.use)
+(paren_ty ["(" ")"] @type.use)
+(tyvar_ty (tyvar) @type.use)
 (record_ty
- ["{" "," "}"] @type
- (tyrow [(lab) ":"] @type)?
- (ellipsis_tyrow ["..." ":"] @type)?)
+ ["{" "," "}"] @type.use
+ (tyrow [(lab) ":"] @type.use)?
+ (ellipsis_tyrow ["..." ":"] @type.use)?)
 (tycon_ty
- (tyseq ["(" "," ")"] @type)?
- (longtycon) @type)
+ (tyseq ["(" "," ")"] @type.use)?
+ (longtycon) @type.use)
 
 ;; *******************************************************************
-;; Misc
+;; Labels
 ;; *******************************************************************
 
-;; Record Labels
-(recordsel_exp "#" @property)
-(lab) @property
+(recordsel_exp "#" @field)
+(lab) @field
 
 ;; *******************************************************************
 ;; Punctuation
 ;; *******************************************************************
 
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
-["." "," ":" ";" "|" "=>" ":>"] @punctuation.delimiter
+["," ":" ";" "|" "=>" ":>"] @punctuation.delimiter
