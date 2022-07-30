@@ -98,9 +98,13 @@
 (datbind name: (tycon) @type.def)
 (datarepl_dec name: (tycon) @type.def)
 
+(wheretype_sigexp (longtycon) @type.def)
+
 (typedesc (tycon) @type.def)
 (datdesc (tycon) @type.def)
 (datarepl_spec name: (tycon) @type.def)
+
+(sharingtype_spec (longtycon) @type.def)
 
 ;; *******************************************************************
 ;; Structure Identifiers
@@ -110,6 +114,8 @@
 (strbind name: (strid) @module.def)
 
 (strdesc (strid) @module.def)
+
+(sharing_spec (longstrid) @type.def)
 
 (fctbind (strid) @module.def)
 
