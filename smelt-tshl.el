@@ -36,12 +36,12 @@
 ;;;;; Variants
 
 (defface tree-sitter-hl-face:variant.def
-  '((default :inherit tree-sitter-hl-face:variable.def :weight thin))
+  '((default :inherit tree-sitter-hl-face:variable.def :weight thin :slant italic))
   "Face for enum variant definitions (binding occurrences)."
   :group 'tree-sitter-hl-faces)
 
 (defface tree-sitter-hl-face:variant.use
-  '((default :inherit tree-sitter-hl-face:variable.use :weight thin))
+  '((default :inherit tree-sitter-hl-face:variable.use :weight thin :slant italic))
   "Face for enum variant uses."
   :group 'tree-sitter-hl-faces)
 

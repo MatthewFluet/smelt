@@ -47,7 +47,7 @@
 
 ;;;;; Syntax Table
 
-(defvar smelt-mode-syntax-table 
+(defvar smelt-mode-syntax-table
  (let ((st (make-syntax-table)))
     ;; Comments
     (modify-syntax-entry ?\( "()1" st)
