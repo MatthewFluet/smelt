@@ -24,7 +24,7 @@
 
 (require 'smelt-fl)
 (require 'smelt-ts)
-(require 'smelt-tshl)
+(require 'smelt-ts-hl)
 
 ;;; _
 
@@ -32,7 +32,7 @@
   "Reload smelt package."
   (interactive)
   (unload-feature 'smelt)
-  (unload-feature 'smelt-tshl)
+  (unload-feature 'smelt-ts-hl)
   (unload-feature 'smelt-ts)
   (unload-feature 'smelt-fl)
   (unload-feature 'smelt-core)

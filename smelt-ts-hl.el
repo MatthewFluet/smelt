@@ -1,4 +1,4 @@
-;;; smelt-tshl.el --- Support for tree-sitter-hl-mode  -*- lexical-binding: t; coding: utf-8 -*-
+;;; smelt-ts-hl.el --- Support for tree-sitter-hl-mode  -*- lexical-binding: t; coding: utf-8 -*-
 
 ;;; Commentary:
 
@@ -95,29 +95,29 @@
 
 ;;;; Public
 
-(defconst smelt-tshl-highlights-file
-  (concat (file-name-as-directory smelt--dir) "smelt-tshl-highlights.scm"))
+(defconst smelt-ts-hl-highlights-file
+  (concat (file-name-as-directory smelt--dir) "smelt-ts-hl-highlights.scm"))
 
 ;;;; Private
 
-(defconst smelt-tshl--hl-default-patterns
+(defconst smelt-ts-hl--hl-default-patterns
   (condition-case nil
       (with-temp-buffer
-        (insert-file-contents smelt-tshl-highlights-file)
+        (insert-file-contents smelt-ts-hl-highlights-file)
         (buffer-string))
     (file-missing nil)))
 
-(defun smelt-tshl--setup ()
+(defun smelt-ts-hl--setup ()
   "Configure and enable `tree-sitter-hl-mode' for `smelt-mode'."
   (if (null font-lock-defaults)
       (setq-local font-lock-defaults '(())))
-  (setq-local tree-sitter-hl-default-patterns smelt-tshl--hl-default-patterns)
+  (setq-local tree-sitter-hl-default-patterns smelt-ts-hl--hl-default-patterns)
   (tree-sitter-hl-mode +1)
 )
-(add-hook 'smelt-mode--setup-hook #'smelt-tshl--setup 1)
+(add-hook 'smelt-mode--setup-hook #'smelt-ts-hl--setup 1)
 
 ;;;; Footer
 
-(provide 'smelt-tshl)
+(provide 'smelt-ts-hl)
 
-;;; smelt-tshl.el ends here
+;;; smelt-ts-hl.el ends here
