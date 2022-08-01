@@ -6,10 +6,10 @@
 
 ;;;; Requirements
 
+(require 'tree-sitter-hl)
+
 (require 'smelt-core)
 (require 'smelt-ts)
-
-(require 'tree-sitter-hl)
 
 ;;;; Customization (Faces)
 
@@ -95,15 +95,15 @@
 
 ;;;; Public
 
-(defconst smelt-ts-hl-highlights-file
-  (concat (file-name-as-directory smelt--dir) "smelt-ts-hl-highlights.scm"))
+(defconst smelt-ts-hl-patterns-file
+  (concat (file-name-as-directory smelt--dir) "highlights.scm"))
 
 ;;;; Private
 
-(defconst smelt-ts-hl--hl-default-patterns
+(defconst smelt-ts-hl--default-patterns
   (condition-case nil
       (with-temp-buffer
-        (insert-file-contents smelt-ts-hl-highlights-file)
+        (insert-file-contents smelt-ts-hl-patterns-file)
         (buffer-string))
     (file-missing nil)))
 
@@ -111,7 +111,7 @@
   "Configure and enable `tree-sitter-hl-mode' for `smelt-mode'."
   (if (null font-lock-defaults)
       (setq-local font-lock-defaults '(())))
-  (setq-local tree-sitter-hl-default-patterns smelt-ts-hl--hl-default-patterns)
+  (setq-local tree-sitter-hl-default-patterns smelt-ts-hl--default-patterns)
   (tree-sitter-hl-mode +1)
 )
 (add-hook 'smelt-mode--setup-hook #'smelt-ts-hl--setup 1)
