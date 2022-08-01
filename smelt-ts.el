@@ -1,4 +1,4 @@
-;;; smelt-tshl.el --- Support for tree-sitter-mode  -*- lexical-binding: t; coding: utf-8 -*-
+;;; smelt-ts.el --- Support for tree-sitter-mode  -*- lexical-binding: t; coding: utf-8 -*-
 
 ;;; Commentary:
 
